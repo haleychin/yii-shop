@@ -157,6 +157,7 @@ $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 				'changeMonth' => true,
 				'closeText' => Shop::t('Apply'),
 				'minDate' => +3,
+				'dateFormat'=>Shop::module()->dateFormat2,
 				),
 			));
 ?>

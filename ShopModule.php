@@ -16,6 +16,7 @@ class ShopModule extends CWebModule
 	public $useWithYum = false;
 
 	// Names of the tables
+	public $userTable = 'user';
 	public $categoryTable = 'shop_category';
 	public $productsTable = 'shop_products';
 	public $orderTable = 'shop_order';
@@ -58,7 +59,9 @@ class ShopModule extends CWebModule
 	public $invoiceView = '/order/invoice';
 	public $footerView = '/order/footer';
 
+	// care it might affected de Order.php convertDate or regional language
 	public $dateFormat = 'd/m/Y';
+	public $dateFormat2 = 'dd/mm/yy';
 
 	// Adjust to use your own delivery times. 
 	public $deliveryTimes = array(

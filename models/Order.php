@@ -28,9 +28,15 @@ class Order extends CActiveRecord
 			if(Yii::app()->language == 'de') {
 				$parts = explode('.',$date);
 				$date = mktime(0, 0, 0, $parts[1], $parts[0], $parts[2]);
+			} else if (Yii::app()->language == 'en'){
+				
+				$parts = explode('/',$date);
+				$date = mktime(0, 0, 0, $parts[0], $parts[1], $parts[2]);
+				print_r($parts);
 			} else {
 				$parts = explode('/',$date);
 				$date = mktime(0, 0, 0, $parts[2], $parts[1], $parts[0]);
+				print_r($parts);				
 			}
 		}
 		return $date;
@@ -144,10 +150,10 @@ class Order extends CActiveRecord
 		// This code block is used mainly for searching for orders that a 
 		// specific user has made (a 'through' join is done here)
 		if($this->user_id !== null) {
-			$criteria->join = '
+				$criteria->join = '
 				left join shop_customer on t.customer_id = shop_customer.customer_id 
-				left join users on shop_customer.user_id = users.id';
-			$criteria->compare('users.id', $this->user_id);
+				left join '. Yum::module()->userTable .' on shop_customer.user_id = '. Yum::module()->userTable .'.id';
+			$criteria->compare(''. Yum::module()->userTable .'.id', $this->user_id);
 		}
 
 		return new CActiveDataProvider('Order', array( 'criteria'=>$criteria,));

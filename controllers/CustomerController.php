@@ -80,7 +80,8 @@ class CustomerController extends Controller
 					} 
 				}
 			}
-
+			$model->delivery_address_id = $address->id;
+			$model->billing_address_id = $address->id;
 			if(!$model->hasErrors()) {
 				if($model->save()) {
 					Yii::app()->user->setState('customer_id', $model->customer_id);

@@ -1,14 +1,49 @@
+
 <?php
-error_reporting(E_ALL);
+if($this->breadcrumbs)
+	$this->breadcrumbs=array(
+			Shop::t('Orders')=>array('admin'),
+			Shop::t('Manage'),
+			);
+?>
 
-// change the following paths if necessary
-$yii=dirname(__FILE__).'/yii-1.1.7/framework/yii.php';
-$config=dirname(__FILE__).'/protected/config/main.php';
+<h2> <?php echo Shop::t('Orders'); ?> </h2>
+<?php 
 
-// remove the following lines when in production mode
-defined('YII_DEBUG') or define('YII_DEBUG',false);
-// specify how many levels of call stack should be shown in each log message
-// defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
+$this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'order-grid',
+	'dataProvider'=>$model->search(),
+	'filter'=>$model,
+	'columns'=>array(
+		'order_id',
+		'customer.address.firstname',
+		'customer.address.lastname',
+		array(
+			'name' => 'ordering_date',
+			'value' => 'date(Shop::module()->dateFormat, $data->ordering_date)',
+			'filter' => false
+			),
+		array(
+			'name' => 'delivery_date',
+			'value' => 'date(Shop::module()->dateFormat, $data->delivery_date)',
+			'filter' => false,
+			'visible' => Shop::module()->deliveryTimes !== false
+			),
+		array(
+			'name' => 'delivery_time',
+			'value' => '$data->getDeliveryTime()',
+			'filter' => Shop::module()->deliveryTimes,
+			'visible' => Shop::module()->deliveryTimes !== false
+			),
+		array(
+			'name' => 'status',
+			'value' => 'Shop::t($data->status)',
+			'filter' => Order::statusOptions(),
+			), 
+		array(
+			'class'=>'CButtonColumn', 
+			'template' => '{view}',
+		),
 
-require_once($yii);
-Yii::createWebApplication($config)->run();
+	),
+)); ?>

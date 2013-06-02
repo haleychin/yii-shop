@@ -121,6 +121,10 @@ class OrderController extends Controller
 	 * over. Otherwise we need the user to enter his data, and depending on
 	 * whether he is logged in into the system it is saved with his user 
 	 * account or once just for this order.	
+	 * 
+	 * 
+	 * the delivery date and delivery time should be match the 
+	 * Order model on convertDate()
 	 */
 	public function actionCreate(
 			$customer = null,
@@ -266,7 +270,7 @@ class OrderController extends Controller
 					$position->order_id = $order->order_id;
 					$position->product_id = $product['product_id'];
 					$position->amount = $product['amount'];
-					$position->specifications = json_encode($product['Variations']);
+					$position->specifications = json_encode(isset($product['Variations'])?$product['Variations']:null);
 					$position->save();
 				}
 				

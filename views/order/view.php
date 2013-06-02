@@ -94,7 +94,7 @@ if($model->positions)
 					'position' => $position));
 	}
 
-die("jo");
+//die("jo");
 ?>
 
 <div style="clear:both;"> </div>
