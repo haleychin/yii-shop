@@ -1,5 +1,6 @@
 <p> <?php echo Shop::t('Shop'); ?> </p>
 <ul>
+<li> <?php echo CHtml::link(Shop::t('Web Shop'), array('//shop/shop/admin')); ?> </li>
 <li> <?php echo CHtml::link(Shop::t('Article categories'), array('//shop/category/admin')); ?> </li>
 <li> <?php echo CHtml::link(Shop::t('Article specifications'), array('/shop/productSpecification/admin')); ?> </li>
 <li> <?php echo CHtml::link(Shop::t('Articles'), array('/shop/products/admin')); ?> </li>

@@ -51,7 +51,7 @@
 	<?php
 	$this->widget('ShoppingCartWidget'); 
 	$this->widget('ProductCategoriesWidget'); 
-	if(!Yii::app()->user->isGuest) 
+	if(Shop::module()->useWithYum && Yii::app()->user->isAdmin()) 
 		$this->widget('AdminWidget');
 
 	?>	
