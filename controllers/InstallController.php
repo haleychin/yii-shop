@@ -4,7 +4,6 @@ class InstallController extends Controller
 {
 	public function actionInstall() 
 	{
-		$this->layout = '';
 		if($this->module->debug) 
 		{
 			if(Yii::app()->request->isPostRequest) 
@@ -272,19 +271,19 @@ class InstallController extends Controller
 							$db->createCommand($sql)->execute();
 
 							$sql = "INSERT INTO `".$productsTable."` 
-(`product_id`, `tax_id`, `title`, `description`, `price`, `category_id`) VALUES 
-(1, 1, 'Demonstration of Article with variations', 'Hello, World!', '19.99', 1),
-(2, 2, 'Another Demo Article with less Tax', '!!', '29.99', 1), 
-(3, 1, 'Demo3', '', '', 2), (4, 1, 'Demo4', '', '7, 55', 4); ";
+(`product_id`, `tax_id`, `title`, `description`, `price`, `category_id`, `status`) VALUES 
+(1, 1, 'Demonstration of Article with variations', 'Hello, World!', '19.99', 1, 0),
+(2, 2, 'Another Demo Article with less Tax', '!!', '29.99', 1, 0), 
+(3, 1, 'Demo3', '', '', 2, 0), (4, 1, 'Demo4', '', '7, 55', 4, 0); ";
 
 
 							$db->createCommand($sql)->execute();
 							$sql = "
-								INSERT INTO `shop_product_variation` (`id`, `product_id`, `specification_id`, `title`, `price_adjustion`, `position`) VALUES
-								(1, 1, 1, 'variation1', 3, 2),
-								(2, 1, 1, 'variation2', 6, 3),
-								(3, 1, 2, 'variation3', 9, 4),
-								(4, 1, 5, 'please enter a number here', 0, 1);
+								INSERT INTO `shop_product_variation` (`id`, `product_id`, `specification_id`, `title`, `price_adjustion`, `position`, `weight_adjustion`) VALUES
+								(1, 1, 1, 'variation1', 3, 2,0),
+								(2, 1, 1, 'variation2', 6, 3,0),
+								(3, 1, 2, 'variation3', 9, 4,0),
+								(4, 1, 5, 'please enter a number here', 0, 1,0);
 							";
 							$db->createCommand($sql)->execute();
 							$sql = "

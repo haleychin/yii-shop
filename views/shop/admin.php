@@ -30,7 +30,7 @@
 </div>
 <?php
 $this->breadcrumbs=array(
-		Shop::t('Shop')=>array('//shopshop/index'),
+		Shop::t('Shop')=>array('//shop/shop/index'),
 		Shop::t('Administration'),
 		);
 
