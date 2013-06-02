@@ -65,7 +65,7 @@ Documentation on how to do this. </p>
 <div style="clear:both;"> </div>
 
 
-<?php echo CHtml::beginForm('install'); ?>
+<?php echo CHtml::beginForm(array('install/index'), 'GET'); ?>
 <?php echo CHtml::submitButton(Yii::t('ShopModule.shop', 'Install Webshop')); ?>
 <?php echo CHtml::endForm(); ?>
 
