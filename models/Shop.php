@@ -278,4 +278,62 @@
 						"); 
 			}
 		}
+		
+		public static function getMenu(){
+			$items = array();
+			$items[] = array('label'=>'Home', 'url'=>array('/site/index'));
+			$items[] = array('label'=>'All', 'url'=>array('/shop/products/index'));
+			$sortedParentCategory[] = array();//parent_id
+			$titleCategory = array(); //title
+			$combinedCategory = array();//subtitle
+			$data = Category::model()->with()->findAll(array('order' => 'category_id'));
+				
+			foreach($data as $category){
+				$sortedParentCategory[$category->parent_id][$category->category_id] = $category;
+			}
+				
+			foreach ($sortedParentCategory[0] as $parentCategory){
+		
+				$titleCategory[$parentCategory->category_id] = $parentCategory;
+				if (isset($sortedParentCategory[$parentCategory->category_id])){
+					foreach ($sortedParentCategory[$parentCategory->category_id] as $childCategory){
+						$combinedCategory[$parentCategory->category_id][]= $childCategory;
+					}
+				}
+			}
+		
+			foreach($titleCategory as $category){
+				$sublist = array();
+				if (!empty ($category) ){
+					if (isset($combinedCategory[$category->category_id])){
+						foreach ($combinedCategory[$category->category_id] as $item){
+							$sublist[] = array(
+									'label' => $item->title,
+									'url' => array(
+											'//shop/category/view', 'id' => $item->category_id),
+							);
+						}
+					}
+		
+		
+					if(!empty($sublist)){
+						$items[] = array(
+								'label' => $category->title,
+								'url' => array(
+										'//shop/category/view', 'id' => $category->category_id),
+								'items'=>$sublist);
+					} else {
+						$items[] = array(
+								'label' => $category->title,
+								'url' => array(
+										'//shop/category/view', 'id' => $category->category_id));
+					}
+		
+				}
+			}
+			$items[] = array('label'=>'Admin', 'url'=>array('/shop/shop/admin'));
+		
+			return $items;
+		
+		}		
 	}

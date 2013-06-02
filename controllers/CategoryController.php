@@ -6,6 +6,7 @@ class CategoryController extends Controller
 
 	public function beforeAction($action) {
 		$this->layout = Shop::module()->layout;
+		$this->menu = Shop::getMenu();
 		return parent::beforeAction($action);
 	}
 

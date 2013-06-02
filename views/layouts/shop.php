@@ -29,22 +29,14 @@
 	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 		'links'=>$this->breadcrumbs,
 	)); ?><!-- breadcrumbs -->
-		<div id="mainmenu">
-		<?php
-	$items = array();
-	$items[] = array('label'=>'Home', 'url'=>array('/site/index'));
-	$items[] = array('label'=>'All', 'url'=>array('/shop/products/index'));
-	foreach(Category::model()->findAll() as $category)
-	$items[] = array(
-			'label' => $category->title,
-			'url' => array(
-				'//shop/category/view', 'id' => $category->category_id));
-	$items[] = array('label'=>'Admin', 'url'=>array('/shop/shop/admin'));
-
- $this->widget('zii.widgets.CMenu',array(
-			'items'=>$items,
-		)); ?>
-	</div><!-- mainmenu -->
+	<div>
+			<?php
+if (!empty($this->menu)){
+ $this->widget('ext.mbmenu.MbMenu',array(
+			'items'=>$this->menu,
+		)); 
+}?>
+	</div><!-- end of mainmenu -->
 
 	<div id="content">
 	<div style="float: right; max-height: 200px; width: 200px; margin: 5px;">
