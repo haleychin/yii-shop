@@ -331,8 +331,8 @@
 		
 				}
 			}
-			$items[] = array('label'=>'Admin', 'url'=>array('/shop/shop/admin'));
-		
+			$items[] =array('label'=>'Login', 'url'=>array('/user/user'), 'visible'=>Yii::app()->user->isGuest);
+			$items[] =array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/user/auth/logout'), 'visible'=>!Yii::app()->user->isGuest);		
 			return $items;
 		
 		}		
