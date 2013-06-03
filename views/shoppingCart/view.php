@@ -84,8 +84,13 @@ if($products) {
 								Yii::app()->baseUrl.'/'.$variation, '', array(
 									'width' => Shop::module()->imageWidthThumb));
 			}
+		} else {
+			
+			$img = CHtml::image(
+								Yii::app()->baseUrl.'/'.Shop::module()->productImagesFolder. '/'. $model->images[0]->filename, '', array(
+									'width' => Shop::module()->imageWidthThumb));			
 		}
-
+		
 			printf('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class="text-right price_single_'.$position.'">%s</td><td class="text-right price_'.$position.'">%s</td><td>%s</td></tr>',
 					$img,
 					CHtml::textField('amount_'.$position,
@@ -96,8 +101,8 @@ if($products) {
 						),
 					$model->title,
 					$variations,
-					Shop::priceFormat($model->getPrice($product['Variations'])),
-					Shop::priceFormat($model->getPrice($product['Variations'], $product['amount'])),
+					Shop::priceFormat($model->getPrice(isset($product['Variations'])?$product['Variations']: null)),
+					Shop::priceFormat($model->getPrice(isset($product['Variations'])?$product['Variations']: null, $product['amount'])),
 					CHtml::link(Shop::t('Remove'), array(
 							'//shop/shoppingCart/delete',
 							'id' => $position), array(
