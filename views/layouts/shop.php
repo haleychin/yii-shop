@@ -45,6 +45,8 @@ if (!empty($this->menu)){
 	$this->widget('ProductCategoriesWidget'); 
 	if(Shop::module()->useWithYum && Yii::app()->user->isAdmin()) 
 		$this->widget('AdminWidget');
+	else if (!Shop::module()->useWithYum && !Yii::app()->user->isGuest)
+		$this->widget('AdminWidget');
 
 	?>	
 	</div>
