@@ -85,10 +85,12 @@ if($products) {
 									'width' => Shop::module()->imageWidthThumb));
 			}
 		} else {
-			
-			$img = CHtml::image(
-								Yii::app()->baseUrl.'/'.Shop::module()->productImagesFolder. '/'. $model->images[0]->filename, '', array(
-									'width' => Shop::module()->imageWidthThumb));			
+			if (isset($model->images[0]))
+				$img = CHtml::image(
+						Yii::app()->baseUrl.'/'.Shop::module()->productImagesFolder. '/'. $model->images[0]->filename, '', array(
+								'width' => Shop::module()->imageWidthThumb));
+			else
+				$img = null;		
 		}
 		
 			printf('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class="text-right price_single_'.$position.'">%s</td><td class="text-right price_'.$position.'">%s</td><td>%s</td></tr>',
