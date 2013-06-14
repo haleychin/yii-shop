@@ -21,7 +21,8 @@ $this->breadcrumbs=array(
 <h3> <?php echo Shop::t('I am a registered customer'); ?></h3>
 
 <p> <?php echo Shop::t('Click {link} if you are already registered', array(
-	'{link}' =>  CHtml::link(Shop::t('here'), Shop::module()->loginUrl))); ?> 
+	'{link}' =>  CHtml::link(Shop::t('here'), Shop::module()->useWithYum? array(
+		'/user/auth', 'action' => '/shop/order/create') : Shop::module()->loginUrl))); ?> 
 </p>
 <hr />
 <h3><?php echo Shop::t('I am a new customer'); ?></h3>
