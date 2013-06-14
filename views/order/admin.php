@@ -43,6 +43,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		array(
 			'class'=>'CButtonColumn', 
 			'template' => '{view}',
+			'viewButtonUrl' => 'Yii::app()->createUrl("/shop/order/view",
+									array("id" => $data->order_id))',
 		),
 
 	),
