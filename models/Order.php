@@ -32,11 +32,9 @@ class Order extends CActiveRecord
 				
 				$parts = explode('/',$date);
 				$date = mktime(0, 0, 0, $parts[0], $parts[1], $parts[2]);
-				print_r($parts);
 			} else {
 				$parts = explode('/',$date);
-				$date = mktime(0, 0, 0, $parts[2], $parts[1], $parts[0]);
-				print_r($parts);				
+				$date = mktime(0, 0, 0, $parts[2], $parts[1], $parts[0]);			
 			}
 		}
 		return $date;
